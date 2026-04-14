@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# raw source assets (duplicated in public/)
+/Logo/
+/Puzzle Images/
+/Vendor images/
+/Edgewood_Master_Build_Prompt.docx.md
