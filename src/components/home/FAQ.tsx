@@ -9,7 +9,7 @@ const faqs = [
   },
   {
     q: "I lost a piece. What now?",
-    a: "Email us with your order number and we'll cut and ship a replacement free of charge — as long as Edgewood exists, your puzzle is complete.",
+    a: "Email us with your order number and we'll cut and ship a replacement free of charge. As long as Edgewood exists, your puzzle is complete.",
   },
   {
     q: "Can I frame the finished puzzle?",
@@ -17,7 +17,7 @@ const faqs = [
   },
   {
     q: "How long does shipping take?",
-    a: "Orders ship from Indiana within 48 hours. US delivery is 3–5 business days, free over $50. International shipping is available at checkout.",
+    a: "Orders ship from Indiana within 48 hours. US delivery is 3 to 5 business days, free over $50. International shipping is available at checkout.",
   },
 ];
 

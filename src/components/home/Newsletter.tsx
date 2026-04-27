@@ -27,7 +27,7 @@ export default function Newsletter() {
         </h2>
         <p className="font-dm text-lg text-[#FBEADB]/70 max-w-xl mx-auto mb-10 leading-relaxed">
           A short monthly note from our studio. New collections, artist stories,
-          and early access for subscribers — no noise.
+          and early access for subscribers. No noise.
         </p>
 
         <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">

@@ -4,8 +4,8 @@ import { MapPin, ArrowUpRight } from "lucide-react";
 
 const stats = [
   { value: "100%", label: "American made" },
-  { value: "6", label: "Artist collections" },
-  { value: ".008\"", label: "Board thickness" },
+  { value: "3", label: "Artist collections" },
+  { value: "12\"", label: "Wood puzzle size" },
   { value: "14+", label: "Serious puzzlers" },
 ];
 
@@ -25,8 +25,8 @@ export default function OurStory() {
           </div>
           <div className="absolute -bottom-6 -right-6 hidden md:block w-40 aspect-square rounded-2xl overflow-hidden ring-4 ring-[#FBEADB] shadow-[0_20px_40px_rgba(14,17,22,0.25)]">
             <Image
-              src="/puzzles/butterfly/butterfly-3.jpeg"
-              alt="Butterfly collection detail"
+              src="/puzzles/wild-in-color/Wild in Color_tigers_100 pieces_13_25x16_56in.jpg"
+              alt="Wild in Color detail"
               fill
               sizes="160px"
               className="object-cover"
@@ -54,7 +54,7 @@ export default function OurStory() {
               Lafayette, Indiana, through our manufacturing partner Ludo Fact USA.
             </p>
             <p>
-              A great puzzle is more than an image — it&apos;s a tactile
+              A great puzzle is more than an image. It&apos;s a tactile
               experience that demands precision, durability, and a perfect
               interlock. That&apos;s what we&apos;ve set out to make.
             </p>
@@ -79,7 +79,7 @@ export default function OurStory() {
           </div>
 
           <Link
-            href="/story"
+            href="/about"
             className="inline-flex items-center gap-2 font-dm font-bold text-[#0E1116] hover:text-[#F26A1F] transition border-b-2 border-[#0E1116] hover:border-[#F26A1F] pb-1"
           >
             Read the full story <ArrowUpRight size={16} />

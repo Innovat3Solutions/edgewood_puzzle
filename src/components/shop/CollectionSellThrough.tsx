@@ -17,13 +17,7 @@ import PuzzleCard from "@/components/shop/PuzzleCard";
 import MobileCarousel from "@/components/ui/MobileCarousel";
 import type { Puzzle } from "@/data/puzzles";
 
-type CardTheme =
-  | "default"
-  | "ron-magill"
-  | "butterfly"
-  | "laysak"
-  | "kia"
-  | "wild-in-color";
+type CardTheme = "default" | "ron-magill" | "cherp-studio" | "wild-in-color";
 
 export type SellThroughPalette = {
   bg: string;
@@ -58,18 +52,45 @@ export type CollectionSellThroughProps = {
   featuredKicker?: string;
   featuredDescription: string;
   featuredBullets?: string[];
-  sizeLabels?: { starter: string; classic: string; master: string };
-  sizeBlurbs?: { starter: string; classic: string; master: string };
   giftHeadline?: string;
   giftBody?: string;
 };
 
 const trustSignals = [
   { icon: ShieldCheck, label: "Missing-piece guarantee", sub: "Free replacement, for life" },
-  { icon: Sparkles, label: "Museum-grade finish", sub: "2.4mm blue chipboard" },
-  { icon: Leaf, label: "FSC-certified stock", sub: "Soy-based inks" },
+  { icon: Sparkles, label: "Premium materials", sub: "Built to handle, built to last" },
+  { icon: Leaf, label: "Responsibly sourced", sub: "FSC-certified stock, soy-based inks" },
   { icon: Truck, label: "Ships in 48 hours", sub: "Free US shipping over $50" },
 ];
+
+function sizeLabel(pieces: number) {
+  if (pieces <= 100) return "Family";
+  if (pieces <= 500) return "Starter";
+  if (pieces <= 1000) return "Classic";
+  return "Master";
+}
+
+function sizeBlurb(pieces: number) {
+  if (pieces <= 100) return "A single afternoon. Age-friendly. Perfect for gifting.";
+  if (pieces <= 500) return "One long evening. A generous gift. Your re-entry into puzzling.";
+  if (pieces <= 1000) return "The weekend build. Everyone's favorite. Our best-seller.";
+  return "A week on the table. A centerpiece worth framing.";
+}
+
+function finishedSize(puzzle: Puzzle) {
+  if (puzzle.dimensions) return puzzle.dimensions;
+  if (puzzle.pieces <= 100) return "12 × 12 in";
+  if (puzzle.pieces <= 500) return "20 × 14 in";
+  if (puzzle.pieces <= 1000) return "26.5 × 19.25 in";
+  return "31.5 × 23.5 in";
+}
+
+function buildTime(pieces: number) {
+  if (pieces <= 100) return "1 to 2 hrs";
+  if (pieces <= 500) return "4 to 7 hrs";
+  if (pieces <= 1000) return "8 to 14 hrs";
+  return "14 to 22 hrs";
+}
 
 export default function CollectionSellThrough({
   puzzles,
@@ -82,36 +103,17 @@ export default function CollectionSellThrough({
     "Matte anti-glare finish, color-true offset print",
     "Linen-wrapped keepsake box with poster reference",
   ],
-  sizeLabels = { starter: "Starter", classic: "Classic", master: "Master" },
-  sizeBlurbs = {
-    starter: "One long evening. A generous gift. Your re-entry into puzzling.",
-    classic: "The weekend build. Everyone's favorite. Our best-seller.",
-    master: "A week on the table. A centerpiece worth framing.",
-  },
   giftHeadline = "Give a weekend worth remembering",
   giftBody = "Edgewood gift cards never expire, arrive instantly, and come with a handwritten note option at checkout.",
 }: CollectionSellThroughProps) {
   const featured = puzzles[0];
-  const bySize = [
-    {
-      pieces: 500,
-      label: sizeLabels.starter,
-      blurb: sizeBlurbs.starter,
-      items: puzzles.filter((p) => p.pieces === 500),
-    },
-    {
-      pieces: 1000,
-      label: sizeLabels.classic,
-      blurb: sizeBlurbs.classic,
-      items: puzzles.filter((p) => p.pieces === 1000),
-    },
-    {
-      pieces: 1500,
-      label: sizeLabels.master,
-      blurb: sizeBlurbs.master,
-      items: puzzles.filter((p) => p.pieces === 1500),
-    },
-  ].filter((g) => g.items.length > 0);
+  const uniqueSizes = Array.from(new Set(puzzles.map((p) => p.pieces))).sort((a, b) => a - b);
+  const bySize = uniqueSizes.map((pieces) => ({
+    pieces,
+    label: sizeLabel(pieces),
+    blurb: sizeBlurb(pieces),
+    items: puzzles.filter((p) => p.pieces === pieces),
+  }));
 
   const cssVars = {
     "--st-bg": palette.bg,
@@ -175,28 +177,8 @@ export default function CollectionSellThrough({
 
               <div className="grid grid-cols-3 gap-2 md:gap-4 mb-8">
                 <Spec icon={PuzzleIcon} label="Pieces" value={`${featured.pieces}`} />
-                <Spec
-                  icon={Ruler}
-                  label="Finished"
-                  value={
-                    featured.pieces === 500
-                      ? "20 × 14 in"
-                      : featured.pieces === 1000
-                      ? "26.5 × 19.25 in"
-                      : "31.5 × 23.5 in"
-                  }
-                />
-                <Spec
-                  icon={Clock}
-                  label="Build time"
-                  value={
-                    featured.pieces === 500
-                      ? "4–7 hrs"
-                      : featured.pieces === 1000
-                      ? "8–14 hrs"
-                      : "14–22 hrs"
-                  }
-                />
+                <Spec icon={Ruler} label="Finished" value={finishedSize(featured)} />
+                <Spec icon={Clock} label="Build time" value={buildTime(featured.pieces)} />
               </div>
 
               <ul className="space-y-2 mb-8">
@@ -213,7 +195,7 @@ export default function CollectionSellThrough({
 
               <div className="flex flex-wrap items-center gap-4">
                 <span className="font-syne font-bold text-3xl text-[var(--st-accent)]">
-                  ${featured.price}
+                  ${featured.price.toFixed(2)}
                 </span>
                 <button
                   className="btn-hover font-dm font-semibold px-8 py-3 rounded-md"
@@ -238,13 +220,13 @@ export default function CollectionSellThrough({
         <div className="max-w-7xl mx-auto px-4 py-16">
           <div className="text-center mb-12">
             <p className="font-dm text-sm uppercase tracking-[0.2em] text-[var(--st-kicker)] mb-3">
-              Shop by size
+              Shop the collection
             </p>
             <h2 className="font-syne font-bold text-4xl text-[var(--st-text)] mb-3">
-              Pick your commitment
+              Pick your puzzle
             </h2>
             <p className="font-dm text-[var(--st-muted)] max-w-2xl mx-auto">
-              Every design is offered in three sizes. Same art. Same finish. Different weekend.
+              Same finish. Same precision. Your weekend, your pace.
             </p>
           </div>
 
@@ -327,4 +309,3 @@ function Spec({
     </div>
   );
 }
-

@@ -12,7 +12,7 @@ const features = [
     n: "02",
     icon: Sparkles,
     title: "Precision Interlock",
-    body: ".008 puzzle board with a matte finish — every piece seats with a reassuring click.",
+    body: ".008 puzzle board with a matte finish. Every piece seats with a reassuring click.",
   },
   {
     n: "03",

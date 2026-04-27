@@ -17,18 +17,14 @@ type Card = {
 
 // Hand-curated alternation across collections for visual rhythm.
 const CARDS: Card[] = [
-  { id: "s3",       title: "Pillars of Creation", collection: "Space",          href: "/collections/space",          image: "/puzzles/space/space-3.jpeg",                  pieces: "1000 pieces" },
-  { id: "lion",     title: "African Lion",        collection: "Ron Magill",     href: "/collections/ron-magill",     image: "/puzzles/ron-magill/lion.jpeg",                pieces: "1000 pieces" },
-  { id: "b2",       title: "Blue Morpho",         collection: "Butterfly",      href: "/collections/butterfly",      image: "/puzzles/butterfly/butterfly-2.jpeg",          pieces: "1000 pieces" },
-  { id: "wic3",     title: "Neon Plumes",         collection: "Wild in Color",  href: "/collections/wild-in-color",  image: "/puzzles/wild-in-color/wic-3.jpeg",            pieces: "500 pieces" },
-  { id: "ly1",      title: "Golden Hour",         collection: "Gregory Laysak", href: "/collections/gregory-laysak", image: "/puzzles/gregory-laysak/laysak-1.jpeg",        pieces: "1500 pieces" },
-  { id: "kia2",     title: "Studio Two",          collection: "Kevin Kia",      href: "/collections/kia",            image: "/puzzles/kia/kia-2.jpeg",                      pieces: "1000 pieces" },
-  { id: "s11",      title: "Nebula Study",        collection: "Space",          href: "/collections/space",          image: "/puzzles/space/space-11.jpeg",                 pieces: "500 pieces" },
-  { id: "elephant", title: "African Elephant",    collection: "Ron Magill",     href: "/collections/ron-magill",     image: "/puzzles/ron-magill/elephant.jpeg",            pieces: "1000 pieces" },
-  { id: "b7",       title: "Ulysses",             collection: "Butterfly",      href: "/collections/butterfly",      image: "/puzzles/butterfly/butterfly-7.jpeg",          pieces: "1500 pieces" },
-  { id: "wic6",     title: "Tropic Pulse",        collection: "Wild in Color",  href: "/collections/wild-in-color",  image: "/puzzles/wild-in-color/wic-6.jpeg",            pieces: "1000 pieces" },
-  { id: "ly4",      title: "Backcountry Pass",    collection: "Gregory Laysak", href: "/collections/gregory-laysak", image: "/puzzles/gregory-laysak/laysak-4.jpeg",        pieces: "1000 pieces" },
-  { id: "panda",    title: "Giant Panda",         collection: "Ron Magill",     href: "/collections/ron-magill",     image: "/puzzles/ron-magill/giant-panda.jpeg",         pieces: "500 pieces" },
+  { id: "lion",       title: "African Lion",     collection: "Ron Magill",    href: "/collections/ron-magill",    image: "/puzzles/ron-magill/lion.jpeg",              pieces: "500 pieces" },
+  { id: "wic-tigers", title: "Tigers",           collection: "Wild in Color", href: "/collections/wild-in-color", image: "/puzzles/wild-in-color/Wild in Color_tigers_100 pieces_13_25x16_56in.jpg", pieces: "500 pieces" },
+  { id: "cherp-rp",   title: "Red Panda",        collection: "Cherp Studio",  href: "/collections/cherp-studio",  image: "/puzzles/cherp-studio/CherpStudio_RedPanda_19_25x26_625in.jpg",            pieces: "500 pieces" },
+  { id: "elephant",   title: "African Elephant", collection: "Ron Magill",    href: "/collections/ron-magill",    image: "/puzzles/ron-magill/elephant.jpeg",                                        pieces: "500 pieces" },
+  { id: "wic-axo",    title: "Axolotl",          collection: "Wild in Color", href: "/collections/wild-in-color", image: "/puzzles/wild-in-color/Wild in Color_Axelotl_100 pieces_13_25x16_56in.jpg", pieces: "500 pieces" },
+  { id: "panda",      title: "Giant Panda",      collection: "Ron Magill",    href: "/collections/ron-magill",    image: "/puzzles/ron-magill/giant-panda.jpeg",                                     pieces: "500 pieces" },
+  { id: "cherp-tig",  title: "Tiger (Wood)",     collection: "Cherp Studio",  href: "/collections/cherp-studio",  image: "/puzzles/cherp-studio/CherpStudio_WOOD_Tiger_12x12in_REV.jpg",             pieces: "48 pieces · wood" },
+  { id: "leopard",    title: "African Leopard",  collection: "Ron Magill",    href: "/collections/ron-magill",    image: "/puzzles/ron-magill/leopard.jpeg",           pieces: "500 pieces" },
 ];
 
 export default function PuzzleCards() {

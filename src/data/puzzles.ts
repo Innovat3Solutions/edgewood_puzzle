@@ -1,10 +1,9 @@
-export type Collection =
-  | "space"
-  | "ron-magill"
-  | "butterfly"
-  | "gregory-laysak"
-  | "kia"
-  | "wild-in-color";
+export type Collection = "ron-magill" | "cherp-studio" | "wild-in-color";
+
+export type PuzzleVariant = {
+  pieces: number;
+  price: number;
+};
 
 export type Puzzle = {
   slug: string;
@@ -12,57 +11,22 @@ export type Puzzle = {
   subtitle?: string;
   collection: Collection;
   image: string;
+  packaging?: string;
   pieces: number;
   price: number;
+  variants: PuzzleVariant[];
+  material?: string;
+  dimensions?: string;
 };
 
-const pieceCycle = [500, 1000, 1500];
-const pricePack = {
-  space: [28, 34, 42],
-  "ron-magill": [32, 38, 46],
-  butterfly: [28, 34, 42],
-  "gregory-laysak": [32, 38, 46],
-  kia: [30, 36, 44],
-  "wild-in-color": [28, 34, 42],
-} as const;
-
-const spaceTitles = [
-  "Nebula Drift",
-  "Orion's Promise",
-  "Crimson Eclipse",
-  "Starforge",
-  "Galactic Horizon",
-  "Lunar Tide",
-  "Cosmic Bloom",
-  "Event Horizon",
-  "Supernova Song",
-  "Andromeda Dawn",
-  "Celestial Mirage",
-  "Void Gardens",
-  "Parallax",
-  "Stellar Veil",
-  "Horsehead",
-  "Pillars of Dawn",
-  "Gravity Well",
-  "Aurora Silence",
-  "Helix Drift",
-  "Deep Field",
-  "Kepler's Echo",
-  "Solstice",
-  "Quasar Light",
-  "Outer Rim",
+const cardboardVariants: PuzzleVariant[] = [
+  { pieces: 300, price: 19.99 },
+  { pieces: 500, price: 24.99 },
+  { pieces: 1000, price: 34.99 },
 ];
 
-const spaceExt = (i: number) => (i + 1 === 22 ? "png" : "jpeg");
-
-const spacePuzzleList: Puzzle[] = spaceTitles.map((title, i) => ({
-  slug: `space-${i + 1}`,
-  title,
-  collection: "space",
-  image: `/puzzles/space/space-${i + 1}.${spaceExt(i)}`,
-  pieces: pieceCycle[i % 3],
-  price: pricePack.space[i % 3],
-}));
+const RON_MAGILL_PACKAGING =
+  "/puzzles/ron-magill/RM26_Koala_Puzzle in Room Setting.jpg";
 
 const ronMagillPuzzleList: Puzzle[] = [
   { slug: "lion", title: "African Lion", subtitle: "Panthera leo", file: "lion" },
@@ -75,157 +39,150 @@ const ronMagillPuzzleList: Puzzle[] = [
   { slug: "giant-panda", title: "Giant Panda", subtitle: "Ailuropoda melanoleuca", file: "giant-panda" },
   { slug: "koala", title: "Koala", subtitle: "Phascolarctos cinereus", file: "koala" },
   { slug: "giraffe", title: "Reticulated Giraffe", subtitle: "Giraffa reticulata", file: "giraffe" },
-].map(({ slug, title, subtitle, file }, i) => ({
+].map(({ slug, title, subtitle, file }) => ({
   slug: `ron-${slug}`,
   title,
   subtitle,
   collection: "ron-magill" as Collection,
   image: `/puzzles/ron-magill/${file}.jpeg`,
-  pieces: pieceCycle[i % 3],
-  price: pricePack["ron-magill"][i % 3],
+  packaging: RON_MAGILL_PACKAGING,
+  pieces: 500,
+  price: 24.99,
+  variants: cardboardVariants,
+  material: "Cardboard",
+  dimensions: "8\" × 10\"",
 }));
 
-const butterflyTitles = [
-  "Monarch Flight",
-  "Blue Morpho",
-  "Swallowtail",
-  "Painted Lady",
-  "Glasswing",
-  "Peacock Pansy",
-  "Ulysses",
-  "Sulphur Drift",
-  "Emerald Swallowtail",
-  "Zebra Longwing",
-  "Crimson Patch",
-  "Atlas Moth",
-  "Silver Spot",
-  "Cairns Birdwing",
-  "Question Mark",
-  "Iridescent Dawn",
-  "Mourning Cloak",
-  "Tiger's Wing",
-];
+const CHERP_PACKAGING =
+  "/puzzles/cherp-studio/Red Panda_500pieces_Final_Composition_Layered.jpg";
 
-const butterflyList: Puzzle[] = butterflyTitles.map((title, i) => ({
-  slug: `butterfly-${i + 1}`,
+const cherpCardboard: Puzzle[] = [
+  {
+    slug: "cherp-red-panda",
+    title: "Red Panda",
+    file: "CherpStudio_RedPanda_19_25x26_625in.jpg",
+  },
+  {
+    slug: "cherp-gorilla",
+    title: "Western Gorilla",
+    file: "CherpStudio_Gorilla_19_25x26_625in.jpg",
+  },
+  {
+    slug: "cherp-elephant",
+    title: "Asian Elephant",
+    file: "CherpStudio_Adult_Elephant_19_25x26_625in.jpg",
+  },
+  {
+    slug: "cherp-macaws",
+    title: "Macaws in Flight",
+    file: "CherpStudio_Parrots_19_25x26_625in.jpg",
+  },
+].map(({ slug, title, file }) => ({
+  slug,
   title,
-  collection: "butterfly",
-  image: `/puzzles/butterfly/butterfly-${i + 1}.jpeg`,
-  pieces: pieceCycle[i % 3],
-  price: pricePack.butterfly[i % 3],
+  subtitle: "Cherp Studio",
+  collection: "cherp-studio" as Collection,
+  image: `/puzzles/cherp-studio/${file}`,
+  packaging: CHERP_PACKAGING,
+  pieces: 500,
+  price: 24.99,
+  variants: cardboardVariants,
+  material: "Cardboard",
+  dimensions: "8\" × 10\"",
 }));
 
-const laysakTitles = [
-  "Golden Hour",
-  "Red Rock Study",
-  "Quiet Shoreline",
-  "Backcountry Pass",
-  "Alpine Bloom",
-  "Summit Light",
-  "Open Plains",
-];
-
-const laysakList: Puzzle[] = laysakTitles.map((title, i) => ({
-  slug: `laysak-${i + 1}`,
+const cherpWood: Puzzle[] = [
+  {
+    slug: "cherp-tiger-wood",
+    title: "Tiger",
+    file: "CherpStudio_WOOD_Tiger_12x12in_REV.jpg",
+  },
+  {
+    slug: "cherp-giraffe-wood",
+    title: "Giraffe",
+    file: "CherpStudio_WOOD_giraffe_12x12in_REV2.jpg",
+  },
+].map(({ slug, title, file }) => ({
+  slug,
   title,
-  subtitle: "Gregory Laysak",
-  collection: "gregory-laysak",
-  image: `/puzzles/gregory-laysak/laysak-${i + 1}.jpeg`,
-  pieces: pieceCycle[i % 3],
-  price: pricePack["gregory-laysak"][i % 3],
+  subtitle: "Cherp Studio · Wood",
+  collection: "cherp-studio" as Collection,
+  image: `/puzzles/cherp-studio/${file}`,
+  packaging: CHERP_PACKAGING,
+  pieces: 48,
+  price: 6.99,
+  variants: [{ pieces: 48, price: 6.99 }],
+  material: "Wood",
+  dimensions: "12\" × 12\"",
 }));
 
-const kiaTitles = [
-  "Studio One",
-  "Studio Two",
-  "Studio Three",
-  "Studio Four",
-  "Studio Five",
-  "Studio Six",
-  "Studio Seven",
-  "Studio Eight",
-];
+const cherpStudioPuzzleList: Puzzle[] = [...cherpCardboard, ...cherpWood];
 
-const kiaList: Puzzle[] = kiaTitles.map((title, i) => ({
-  slug: `kia-${i + 1}`,
+const WIC_PACKAGING =
+  "/puzzles/wild-in-color/Wild in Color_300Pieces_Tiger Puzzle_Mockup.jpg";
+
+const wildInColorList: Puzzle[] = [
+  {
+    slug: "wic-axolotl",
+    title: "Axolotl",
+    file: "Wild in Color_Axelotl_100 pieces_13_25x16_56in.jpg",
+  },
+  {
+    slug: "wic-chameleon",
+    title: "Chameleon",
+    file: "Wild in Color_Chameleon_100 pieces_13_25x16_56in.jpg",
+  },
+  {
+    slug: "wic-tigers",
+    title: "Tigers",
+    file: "Wild in Color_tigers_100 pieces_13_25x16_56in.jpg",
+  },
+  {
+    slug: "wic-orangutans",
+    title: "Orangutans",
+    file: "Wild in Color_Orangs_19_25x26_625in.jpg",
+  },
+].map(({ slug, title, file }) => ({
+  slug,
   title,
-  subtitle: "Kevin Kia",
-  collection: "kia",
-  image: `/puzzles/kia/kia-${i + 1}.jpeg`,
-  pieces: pieceCycle[i % 3],
-  price: pricePack.kia[i % 3],
-}));
-
-const wicTitles = [
-  "Electric Jungle",
-  "Prism Reef",
-  "Neon Plumes",
-  "Feathered Flame",
-  "Color Riot",
-  "Tropic Pulse",
-  "Canopy Dream",
-  "Painted Sky",
-  "Vivid Field",
-  "Chromatic Wild",
-];
-
-const wildInColorList: Puzzle[] = wicTitles.map((title, i) => ({
-  slug: `wic-${i + 1}`,
-  title,
-  collection: "wild-in-color",
-  image: `/puzzles/wild-in-color/wic-${i + 1}.jpeg`,
-  pieces: pieceCycle[i % 3],
-  price: pricePack["wild-in-color"][i % 3],
+  subtitle: "Wild in Color",
+  collection: "wild-in-color" as Collection,
+  image: `/puzzles/wild-in-color/${file}`,
+  packaging: WIC_PACKAGING,
+  pieces: 500,
+  price: 24.99,
+  variants: cardboardVariants,
+  material: "Cardboard",
+  dimensions: "8\" × 10\"",
 }));
 
 export const puzzles: Puzzle[] = [
-  ...spacePuzzleList,
   ...ronMagillPuzzleList,
-  ...butterflyList,
-  ...laysakList,
-  ...kiaList,
+  ...cherpStudioPuzzleList,
   ...wildInColorList,
 ];
 
-export const spacePuzzles = spacePuzzleList;
 export const ronMagillPuzzles = ronMagillPuzzleList;
-export const butterflyPuzzles = butterflyList;
-export const gregoryLaysakPuzzles = laysakList;
-export const kiaPuzzles = kiaList;
+export const cherpStudioPuzzles = cherpStudioPuzzleList;
 export const wildInColorPuzzles = wildInColorList;
 
 export const collectionMeta: Record<
   Collection,
   { name: string; href: string; tagline: string }
 > = {
-  space: {
-    name: "Space",
-    href: "/collections/space",
-    tagline: "Nebulae, eclipses, and deep-field vistas",
-  },
   "ron-magill": {
     name: "Ron Magill",
     href: "/collections/ron-magill",
     tagline: "Signature wildlife portraits from four decades in the field",
   },
-  butterfly: {
-    name: "Butterfly",
-    href: "/collections/butterfly",
-    tagline: "Iridescent wings, captured in motion",
-  },
-  "gregory-laysak": {
-    name: "Gregory Laysak",
-    href: "/collections/gregory-laysak",
-    tagline: "Landscape photography across the American West",
-  },
-  kia: {
-    name: "Kevin Kia",
-    href: "/collections/kia",
-    tagline: "Studio work and conceptual portraiture",
+  "cherp-studio": {
+    name: "Cherp Studio",
+    href: "/collections/cherp-studio",
+    tagline: "Vibrant wildlife — cardboard 8\" × 10\" and wood 12\" × 12\" puzzles",
   },
   "wild-in-color": {
     name: "Wild in Color",
     href: "/collections/wild-in-color",
-    tagline: "Saturated, joyful nature — turned up to eleven",
+    tagline: "Saturated, joyful nature on premium 8\" × 10\" cardboard",
   },
 };

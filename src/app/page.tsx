@@ -1,30 +1,20 @@
 import Navbar from "@/components/nav/Navbar";
-import InteractiveHero from "@/components/hero/InteractiveHero";
-import PuzzleCards from "@/components/cards/PuzzleCards";
-import CollectionShowcase from "@/components/home/CollectionShowcase";
-import FeatureHighlights from "@/components/home/FeatureHighlights";
-import ProductSpecs from "@/components/home/ProductSpecs";
-import Testimonials from "@/components/home/Testimonials";
-import FAQ from "@/components/home/FAQ";
+import VideoHero from "@/components/home/VideoHero";
+import TabbedCollections from "@/components/home/TabbedCollections";
+import PuzzleDifference from "@/components/home/PuzzleDifference";
 import VendorCarousel from "@/components/home/VendorCarousel";
-import OurStory from "@/components/home/OurStory";
 import Newsletter from "@/components/home/Newsletter";
 
 export default function Home() {
   return (
     <>
-      <Navbar variant="light" />
+      <Navbar variant="over-video" />
 
-      <main className="flex-1 relative">
-        <InteractiveHero />
-        <PuzzleCards />
-        <CollectionShowcase />
-        <FeatureHighlights />
-        <ProductSpecs />
-        <Testimonials />
-        <FAQ />
+      <main className="flex-1 relative bg-white">
+        <VideoHero />
+        <TabbedCollections />
+        <PuzzleDifference />
         <VendorCarousel />
-        <OurStory />
         <Newsletter />
       </main>
     </>

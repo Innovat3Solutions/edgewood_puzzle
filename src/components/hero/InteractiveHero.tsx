@@ -345,11 +345,10 @@ export default function InteractiveHero() {
           className="mt-4 font-dm text-[#55555E] leading-[1.65] max-w-[92vw] md:max-w-[56ch]"
           style={{ fontSize: "clamp(14px, 1.1vw, 17px)" }}
         >
-          American-made jigsaws on 2.4mm blue chipboard, printed with soy-based
-          inks and finished matte so the art holds from the first piece to the
-          last. Six collections — deep-space telescopy, signature wildlife,
-          butterflies, landscapes, studio portraiture, and color-forward
-          nature — all built to the same museum-grade standard.
+          American-made puzzles built to handle and keep. Ron Magill&apos;s
+          500-piece wildlife portraits on premium chipboard, plus 48-piece
+          solid-wood 12&quot; × 12&quot; puzzles from Cherp Studio and Wild in
+          Color, all printed and finished to the same museum-grade standard.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4 pointer-events-auto">

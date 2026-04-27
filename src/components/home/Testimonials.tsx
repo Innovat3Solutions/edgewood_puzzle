@@ -4,7 +4,7 @@ import MobileCarousel from "@/components/ui/MobileCarousel";
 const quotes = [
   {
     body:
-      "The fit is unreal. Every piece drops in with a click — you can feel the difference the moment you open the box.",
+      "The fit is unreal. Every piece drops in with a click. You can feel the difference the moment you open the box.",
     name: "Marguerite D.",
     role: "1,000-piece Space",
   },

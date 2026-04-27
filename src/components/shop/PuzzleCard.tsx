@@ -3,15 +3,10 @@
 import Image from "next/image";
 import type { Puzzle } from "@/data/puzzles";
 import { usePuzzlePreview } from "@/components/preview/PuzzlePreviewProvider";
+import { useCart } from "@/components/cart/CartProvider";
 import { Eye } from "lucide-react";
 
-type Theme =
-  | "default"
-  | "ron-magill"
-  | "butterfly"
-  | "laysak"
-  | "kia"
-  | "wild-in-color";
+type Theme = "default" | "ron-magill" | "cherp-studio" | "wild-in-color";
 
 const themes: Record<Theme, {
   card: string;
@@ -40,32 +35,14 @@ const themes: Record<Theme, {
     price: "text-amber-300",
     button: "border-amber-300/70 text-amber-200 hover:bg-amber-300 hover:text-[#0e1a12]",
   },
-  butterfly: {
-    card: "bg-[#23122a]/85 border-fuchsia-900/60 hover:border-fuchsia-300/70 shadow-lg shadow-black/30",
-    imageBg: "bg-[#1a0f1e]",
-    title: "text-fuchsia-100",
-    subtitle: "text-violet-200/70",
-    meta: "text-violet-200/60",
-    price: "text-fuchsia-300",
-    button: "border-fuchsia-300/70 text-fuchsia-200 hover:bg-fuchsia-400 hover:text-[#1a0f1e] hover:border-fuchsia-400",
-  },
-  laysak: {
-    card: "bg-[#0F2537]/90 border-[#F27A2E]/30 hover:border-[#F27A2E]/80 shadow-lg shadow-black/40",
-    imageBg: "bg-[#081624]",
-    title: "text-[#FFE8CC]",
-    subtitle: "text-[#FFB347]/80",
-    meta: "text-[#9BB8C8]",
-    price: "text-[#F27A2E]",
-    button: "border-[#F27A2E]/70 text-[#FFE8CC] hover:bg-[#F27A2E] hover:text-[#081624] hover:border-[#F27A2E]",
-  },
-  kia: {
-    card: "bg-[#131317] border-white/10 hover:border-white/40",
-    imageBg: "bg-[#0c0c10]",
-    title: "text-white",
-    subtitle: "text-neutral-400",
-    meta: "text-neutral-500",
-    price: "text-white",
-    button: "border-white/40 text-white hover:bg-white hover:text-[#0c0c10]",
+  "cherp-studio": {
+    card: "bg-[#17322a]/90 border-emerald-900/50 hover:border-emerald-300/70 shadow-lg shadow-black/30",
+    imageBg: "bg-[#0f1a16]",
+    title: "text-emerald-100",
+    subtitle: "text-emerald-200/70",
+    meta: "text-emerald-200/60",
+    price: "text-emerald-300",
+    button: "border-emerald-300/70 text-emerald-200 hover:bg-emerald-300 hover:text-[#0f1a16]",
   },
   "wild-in-color": {
     card: "bg-[#10191e]/85 border-cyan-900/50 hover:border-pink-300/70 shadow-lg shadow-black/30",
@@ -87,12 +64,19 @@ export default function PuzzleCard({
 }) {
   const t = themes[theme];
   const { open } = usePuzzlePreview();
+  const { add: addToCart } = useCart();
   const openPreview = () =>
     open({
+      slug: puzzle.slug,
       image: puzzle.image,
       title: puzzle.title,
+      subtitle: puzzle.subtitle,
       collection: puzzle.subtitle,
       pieces: puzzle.pieces,
+      packaging: puzzle.packaging,
+      variants: puzzle.variants,
+      material: puzzle.material,
+      dimensions: puzzle.dimensions,
     });
   return (
     <div
@@ -122,8 +106,22 @@ export default function PuzzleCard({
         )}
         <p className={`font-dm text-sm mt-1 ${t.meta}`}>{puzzle.pieces} pieces</p>
         <div className="flex items-center justify-between mt-3">
-          <span className={`font-syne font-bold ${t.price}`}>${puzzle.price}</span>
+          <span className={`font-syne font-bold ${t.price}`}>${puzzle.price.toFixed(2)}</span>
           <button
+            type="button"
+            onClick={() =>
+              addToCart({
+                slug: puzzle.slug,
+                title: puzzle.title,
+                subtitle: puzzle.subtitle,
+                image: puzzle.image,
+                collection: puzzle.subtitle,
+                pieces: puzzle.pieces,
+                price: puzzle.price,
+                material: puzzle.material,
+                dimensions: puzzle.dimensions,
+              })
+            }
             className={`text-xs border px-3 py-1.5 rounded transition ${t.button}`}
           >
             Add to cart

@@ -2,56 +2,28 @@ import Link from "next/link";
 import Image from "next/image";
 import { Mail, MapPin } from "lucide-react";
 
-const InstagramIcon = (p: { size?: number }) => (
-  <svg width={p.size ?? 16} height={p.size ?? 16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="3" width="18" height="18" rx="5" />
-    <circle cx="12" cy="12" r="4" />
-    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-  </svg>
-);
-const FacebookIcon = (p: { size?: number }) => (
-  <svg width={p.size ?? 16} height={p.size ?? 16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-  </svg>
-);
-const YoutubeIcon = (p: { size?: number }) => (
-  <svg width={p.size ?? 16} height={p.size ?? 16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-2C18.88 4 12 4 12 4s-6.88 0-8.59.42a2.78 2.78 0 0 0-1.95 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 2C5.12 20 12 20 12 20s6.88 0 8.59-.42a2.78 2.78 0 0 0 1.95-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
-    <polygon points="10 15 15 12 10 9 10 15" fill="currentColor" stroke="none" />
-  </svg>
-);
-
 const shop = [
   { href: "/shop", label: "All Puzzles" },
+  { href: "/shop?pieces=300", label: "300 Piece" },
   { href: "/shop?pieces=500", label: "500 Piece" },
-  { href: "/shop?pieces=1000", label: "1,000 Piece" },
-  { href: "/shop?pieces=1500", label: "1,500 Piece" },
-  { href: "/shop?gift=true", label: "Gift Cards" },
+  { href: "/shop?pieces=1000", label: "1000 Piece" },
 ];
 
 const collections = [
-  { href: "/collections/space", label: "Space" },
-  { href: "/collections/ron-magill", label: "Ron Magill" },
-  { href: "/collections/butterfly", label: "Butterfly" },
-  { href: "/collections/gregory-laysak", label: "Gregory Laysak" },
-  { href: "/collections/kia", label: "Kevin Kia" },
-  { href: "/collections/wild-in-color", label: "Wild in Color" },
+  { href: "/shop?collection=ron-magill", label: "Ron Magill" },
+  { href: "/shop?collection=cherp-studio", label: "Cherp Studio" },
+  { href: "/shop?collection=wild-in-color", label: "Wild in Color" },
 ];
 
 const company = [
-  { href: "/story", label: "Our Story" },
-  { href: "/artists", label: "Artists" },
-  { href: "/play", label: "Play" },
-  { href: "/contact", label: "Contact" },
-  { href: "/press", label: "Press" },
+  { href: "/about", label: "About Edgewood" },
+  { href: "/custom", label: "Custom Puzzle" },
+  { href: "/about#contact", label: "Contact" },
 ];
 
 const support = [
   { href: "/shipping", label: "Shipping & Returns" },
   { href: "/faq", label: "FAQ" },
-  { href: "/care", label: "Puzzle Care" },
-  { href: "/lost-piece", label: "Lost a Piece?" },
-  { href: "/wholesale", label: "Wholesale" },
 ];
 
 export default function Footer() {
@@ -91,24 +63,6 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="flex items-center gap-3 mt-6">
-              {[
-                { href: "https://instagram.com", icon: InstagramIcon, label: "Instagram" },
-                { href: "https://facebook.com", icon: FacebookIcon, label: "Facebook" },
-                { href: "https://youtube.com", icon: YoutubeIcon, label: "YouTube" },
-              ].map(({ href, icon: Icon, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-10 h-10 rounded-full border border-[#FBEADB]/20 flex items-center justify-center hover:border-[#F26A1F] hover:text-[#F26A1F] transition"
-                >
-                  <Icon size={16} />
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Link columns */}

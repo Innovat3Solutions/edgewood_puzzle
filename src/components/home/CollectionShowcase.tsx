@@ -2,11 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import {
-  spacePuzzles,
   ronMagillPuzzles,
-  butterflyPuzzles,
-  gregoryLaysakPuzzles,
-  kiaPuzzles,
+  cherpStudioPuzzles,
   wildInColorPuzzles,
 } from "@/data/puzzles";
 
@@ -22,58 +19,31 @@ type Tile = {
 
 const tiles: Tile[] = [
   {
-    href: "/collections/space",
-    cover: spacePuzzles[0].image,
-    eyebrow: "Flagship",
-    title: "Space",
-    blurb: "Nebulae, eclipses, and deep-field vistas from NASA's most powerful telescopes.",
-    count: spacePuzzles.length,
-    area: "md:col-span-2 md:row-span-2",
-  },
-  {
     href: "/collections/ron-magill",
     cover:
       (ronMagillPuzzles.find((p) => p.slug === "ron-lion") ?? ronMagillPuzzles[0]).image,
-    eyebrow: "Signature",
+    eyebrow: "Signature · 500 piece",
     title: "Ron Magill",
     blurb: "Four decades of wildlife photography, signed at the box.",
     count: ronMagillPuzzles.length,
-    area: "md:col-span-2",
+    area: "md:col-span-2 md:row-span-2",
   },
   {
-    href: "/collections/butterfly",
-    cover: butterflyPuzzles[0].image,
-    eyebrow: "Iridescent",
-    title: "Butterfly",
-    blurb: "Wings rendered scale-by-scale.",
-    count: butterflyPuzzles.length,
-    area: "",
+    href: "/collections/cherp-studio",
+    cover: cherpStudioPuzzles[0].image,
+    eyebrow: 'Wood · 48 piece · 12"',
+    title: "Cherp Studio",
+    blurb: "Hand-finished wood puzzles, built to handle and keep.",
+    count: cherpStudioPuzzles.length,
+    area: "md:col-span-2",
   },
   {
     href: "/collections/wild-in-color",
     cover: wildInColorPuzzles[0].image,
-    eyebrow: "Partner",
+    eyebrow: 'Wood · 48 piece · 12"',
     title: "Wild in Color",
-    blurb: "Saturation turned up. Nature at full chroma.",
+    blurb: "Saturation turned up. Nature at full chroma, on solid wood.",
     count: wildInColorPuzzles.length,
-    area: "",
-  },
-  {
-    href: "/collections/gregory-laysak",
-    cover: gregoryLaysakPuzzles[0].image,
-    eyebrow: "Landscape",
-    title: "Gregory Laysak",
-    blurb: "Patient light across the American West.",
-    count: gregoryLaysakPuzzles.length,
-    area: "md:col-span-2",
-  },
-  {
-    href: "/collections/kia",
-    cover: kiaPuzzles[0].image,
-    eyebrow: "Studio",
-    title: "Kevin Kia",
-    blurb: "Conceptual studio work, quiet palette.",
-    count: kiaPuzzles.length,
     area: "md:col-span-2",
   },
 ];
@@ -85,7 +55,7 @@ export default function CollectionShowcase() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
           <div className="max-w-2xl">
             <p className="font-dm text-[11px] md:text-sm uppercase tracking-[0.28em] text-[#B7541F] mb-4">
-              Six worlds in a box
+              Three worlds in a box
             </p>
             <h2
               className="font-syne font-extrabold text-[#0E1116] tracking-[-0.025em]"
@@ -97,8 +67,8 @@ export default function CollectionShowcase() {
             </h2>
           </div>
           <p className="font-dm text-lg text-[#55555E] md:max-w-sm leading-relaxed">
-            We work with photographers, studios, and archives to source images
-            worth the hours a thousand pieces demand.
+            Signature wildlife from Ron Magill, plus wood 48-piece puzzles from
+            Cherp Studio and Wild in Color. Built to handle, built to keep.
           </p>
         </div>
 
