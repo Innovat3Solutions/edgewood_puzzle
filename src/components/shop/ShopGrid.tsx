@@ -371,6 +371,7 @@ function ShopCard({
           <span className="font-syne font-extrabold text-[#0E1116] text-xl">
             ${selected.price.toFixed(2)}
           </span>
+        
           <button
             type="button"
             onClick={() =>
@@ -388,7 +389,8 @@ function ShopCard({
             }
             aria-label={`Add ${puzzle.title} (${selected.pieces} pc) to cart`}
             className="inline-flex items-center gap-1.5 bg-[#F26A1F] hover:bg-[#E05A10] text-white font-semibold text-xs px-3.5 py-2 rounded-full transition-colors"
-          >
+          > 
+
             <ShoppingCart size={14} />
             Add
           </button>

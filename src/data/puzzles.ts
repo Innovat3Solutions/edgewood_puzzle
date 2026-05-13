@@ -17,6 +17,7 @@ export type Puzzle = {
   variants: PuzzleVariant[];
   material?: string;
   dimensions?: string;
+   addToCartUrl?: string;
 };
 
 const cardboardVariants: PuzzleVariant[] = [
@@ -29,17 +30,39 @@ const RON_MAGILL_PACKAGING =
   "/puzzles/ron-magill/RM26_Koala_Puzzle in Room Setting.jpg";
 
 const ronMagillPuzzleList: Puzzle[] = [
-  { slug: "lion", title: "African Lion", subtitle: "Panthera leo", file: "lion" },
-  { slug: "elephant", title: "African Elephant", subtitle: "Loxodonta africana", file: "elephant" },
-  { slug: "leopard", title: "African Leopard", subtitle: "Panthera pardus", file: "leopard" },
-  { slug: "rhinoceros", title: "Black Rhinoceros", subtitle: "Diceros bicornis", file: "rhinoceros" },
-  { slug: "cheetah", title: "Cheetah", subtitle: "Acinonyx jubatus", file: "cheetah" },
-  { slug: "crabeater-seal", title: "Crabeater Seal", subtitle: "Lobodon carcinophagus", file: "crabeater-seal" },
-  { slug: "gentoo-penguin", title: "Gentoo Penguin", subtitle: "Pygoscelis papua", file: "gentoo-penguin" },
-  { slug: "giant-panda", title: "Giant Panda", subtitle: "Ailuropoda melanoleuca", file: "giant-panda" },
-  { slug: "koala", title: "Koala", subtitle: "Phascolarctos cinereus", file: "koala" },
-  { slug: "giraffe", title: "Reticulated Giraffe", subtitle: "Giraffa reticulata", file: "giraffe" },
-].map(({ slug, title, subtitle, file }) => ({
+  {
+    slug: "lion",
+    title: "African Lion",
+    subtitle: "Panthera leo",
+    file: "lion",
+    addToCartUrl:
+      "https://app.innovat3solutions.com/v2/preview/Pm6eHzF5W99lcJvYZvGN/product/69fcb135b4f5114b0bacc4c3?variant=69fcb135b4f51172e5acc4d8",
+  },
+  {
+    slug: "elephant",
+    title: "African Elephant",
+    subtitle: "Loxodonta africana",
+    file: "elephant",
+    addToCartUrl:
+      "https://app.innovat3solutions.com/v2/preview/Pm6eHzF5W99lcJvYZvGN/product/69fcc12cc23ecf52ae035baf?variant=69fcc12cc23ecf980e035bb4",
+  },
+  {
+    slug: "leopard",
+    title: "African Leopard",
+    subtitle: "Panthera pardus",
+    file: "leopard",
+    addToCartUrl:
+      "https://app.innovat3solutions.com/v2/preview/Pm6eHzF5W99lcJvYZvGN/product/69fcfce6c23ecf0f170ecc9b?variant=69fcfce6c23ecf3dd50eccaa",
+  },
+  {
+    slug: "rhinoceros",
+    title: "Black Rhinoceros",
+    subtitle: "Diceros bicornis",
+    file: "rhinoceros",
+    addToCartUrl:
+      "https://app.innovat3solutions.com/v2/preview/Pm6eHzF5W99lcJvYZvGN/product/69fcfd7156effbc5e67932c5?variant=69fcfd7156effbc6cc7932ca",
+  },
+].map(({ slug, title, subtitle, file, addToCartUrl }) => ({
   slug: `ron-${slug}`,
   title,
   subtitle,
@@ -50,7 +73,8 @@ const ronMagillPuzzleList: Puzzle[] = [
   price: 24.99,
   variants: cardboardVariants,
   material: "Cardboard",
-  dimensions: "8\" × 10\"",
+  dimensions: '8" × 10"',
+  addToCartUrl,
 }));
 
 const CHERP_PACKAGING =
