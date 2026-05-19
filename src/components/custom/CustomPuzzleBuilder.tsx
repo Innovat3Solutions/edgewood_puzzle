@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, useId } from "react";
-import { Upload, X, Check, ShoppingCart, Image as ImageIcon, RotateCcw, ShieldCheck, Truck, Sparkles } from "lucide-react";
+import { Upload, X, Check, ShoppingCart, Image as ImageIcon, RotateCcw, ShieldCheck, Truck, Sparkles, Loader2 } from "lucide-react";
 
 type Orientation = "landscape" | "portrait";
 
@@ -13,9 +13,9 @@ type Variant = {
 };
 
 const VARIANTS: Variant[] = [
-  { pieces: 100,  price: 24.99, dims: '13" × 9.25"',     grid: { landscape: [12, 8],  portrait: [8, 12]  } },
-  { pieces: 300,  price: 29.99, dims: '18" × 13"',       grid: { landscape: [20, 15], portrait: [15, 20] } },
-  { pieces: 500,  price: 34.99, dims: '19.25" × 14.5"',  grid: { landscape: [25, 20], portrait: [20, 25] } },
+  { pieces: 100, price: 24.99, dims: '13" × 9.25"', grid: { landscape: [12, 8], portrait: [8, 12] } },
+  { pieces: 300, price: 29.99, dims: '18" × 13"', grid: { landscape: [20, 15], portrait: [15, 20] } },
+  { pieces: 500, price: 34.99, dims: '19.25" × 14.5"', grid: { landscape: [25, 20], portrait: [20, 25] } },
   { pieces: 1000, price: 39.99, dims: '26.625" × 19.25"', grid: { landscape: [40, 25], portrait: [25, 40] } },
 ];
 
@@ -73,6 +73,9 @@ export default function CustomPuzzleBuilder() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const inputId = useId();
 
+  const [isUploading, setIsUploading] = useState(false);
+  const [cloudinaryUrl, setCloudinaryUrl] = useState<string | null>(null);
+
   const variant = VARIANTS[variantIdx];
   const [cols, rows] = variant.grid[orientation];
   const aspect = orientation === "landscape" ? 3 / 2 : 2 / 3;
@@ -85,18 +88,49 @@ export default function CustomPuzzleBuilder() {
     };
   }, [photo]);
 
+  const uploadToCloudinary = async (file: File) => {
+    setIsUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Upload failed");
+      }
+
+      const data = await response.json();
+      setCloudinaryUrl(data.secure_url);
+      setPhoto(data.secure_url); // Update preview to use Cloudinary URL
+    } catch (error) {
+      console.error("Cloudinary upload error:", error);
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
   const acceptFile = (file: File | null | undefined) => {
     if (!file) return;
     if (!file.type.startsWith("image/")) return;
+
+    // Set local preview immediately
     if (photo && photo.startsWith("blob:")) URL.revokeObjectURL(photo);
     setPhoto(URL.createObjectURL(file));
     setPhotoName(file.name);
+
+    // Start upload
+    uploadToCloudinary(file);
   };
 
   const clearPhoto = () => {
     if (photo && photo.startsWith("blob:")) URL.revokeObjectURL(photo);
     setPhoto(null);
     setPhotoName(null);
+    setCloudinaryUrl(null);
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
@@ -108,6 +142,32 @@ export default function CustomPuzzleBuilder() {
     e.preventDefault();
     setDragOver(false);
     acceptFile(e.dataTransfer.files?.[0]);
+  };
+
+  const handleCheckout = () => {
+    if (!cloudinaryUrl) return;
+
+    // GHL Checkout URLs for each combination
+    const GHL_CHECKOUT_URLS: Record<string, string> = {
+      "portrait-100": "https://app.innovat3solutions.com/v2/preview/F30UaIcNS0keI1F1nddB?notrack=true",
+      "portrait-300": "https://app.innovat3solutions.com/v2/preview/qrVAm2SPwcE3nfHFwv5G?notrack=true",
+      "portrait-500": "https://app.innovat3solutions.com/v2/preview/AJvT75c5Vksq9vvQsMRn?notrack=true",
+      "portrait-1000": "https://app.innovat3solutions.com/v2/preview/0p9e7O5aL55TKjXGjDOy?notrack=true",
+      "landscape-100": "https://app.innovat3solutions.com/v2/preview/bXnkqzmrOppKSwcfVr3z?notrack=true", // Update with actual IDs
+      "landscape-300": "https://app.innovat3solutions.com/v2/preview/8vQfRvTNRPkYWTylgnpE?notrack=true", // Update with actual IDs
+      "landscape-500": "https://app.innovat3solutions.com/v2/preview/gVn8kSOCxG8NIFlPDe93?notrack=true", // Update with actual IDs
+      "landscape-1000": "https://app.innovat3solutions.com/v2/preview/jiuq9TkYYbuwCB2tvEUk?notrack=true", // Update with actual IDs
+    };
+
+    const key = `${orientation}-${variant.pieces}`;
+    const rawUrl = GHL_CHECKOUT_URLS[key] || GHL_CHECKOUT_URLS["landscape-500"];
+    const checkoutUrl = new URL(rawUrl);
+    checkoutUrl.searchParams.set("image_url", cloudinaryUrl);
+    checkoutUrl.searchParams.set("orientation", orientation);
+    checkoutUrl.searchParams.set("pieces", variant.pieces.toString());
+    checkoutUrl.searchParams.set("custom_puzzle", "true");
+
+    window.location.href = checkoutUrl.toString();
   };
 
   return (
@@ -205,16 +265,21 @@ export default function CustomPuzzleBuilder() {
                 />
                 {photo ? (
                   <div className="flex items-center gap-3 bg-white rounded-xl border border-[#0E1116]/10 p-3">
-                    <div className="w-12 h-12 rounded-lg overflow-hidden bg-[#EDDDCC] shrink-0">
+                    <div className="w-12 h-12 rounded-lg overflow-hidden bg-[#EDDDCC] shrink-0 relative">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={photo} alt="" className="w-full h-full object-cover" />
+                      <img src={photo} alt="" className={`w-full h-full object-cover ${isUploading ? 'opacity-40' : ''}`} />
+                      {isUploading && (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <Loader2 size={16} className="animate-spin text-[#F26A1F]" />
+                        </div>
+                      )}
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="font-dm text-sm font-semibold text-[#0E1116] truncate">
                         {photoName ?? "Your photo"}
                       </div>
                       <div className="font-dm text-xs text-[#6A6A73]">
-                        Looks great. Drop another to replace.
+                        {isUploading ? "Uploading to Cloudinary..." : "Uploaded and ready."}
                       </div>
                     </div>
                     <button
@@ -232,11 +297,10 @@ export default function CustomPuzzleBuilder() {
                     onDrop={onDrop}
                     onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
                     onDragLeave={() => setDragOver(false)}
-                    className={`flex items-center gap-4 rounded-xl border-2 border-dashed p-4 cursor-pointer transition-colors ${
-                      dragOver
+                    className={`flex items-center gap-4 rounded-xl border-2 border-dashed p-4 cursor-pointer transition-colors ${dragOver
                         ? "border-[#F26A1F] bg-[#F26A1F]/5"
                         : "border-[#0E1116]/20 bg-white hover:border-[#0E1116]/45"
-                    }`}
+                      }`}
                   >
                     <span className="w-12 h-12 rounded-lg bg-[#FBEADB] flex items-center justify-center text-[#F26A1F] shrink-0">
                       <Upload size={20} />
@@ -281,11 +345,10 @@ export default function CustomPuzzleBuilder() {
                       key={v.pieces}
                       type="button"
                       onClick={() => setVariantIdx(i)}
-                      className={`text-left rounded-xl border p-4 transition-all ${
-                        variantIdx === i
+                      className={`text-left rounded-xl border p-4 transition-all ${variantIdx === i
                           ? "border-[#0E1116] bg-white shadow-[0_8px_24px_-12px_rgba(14,17,22,0.25)]"
                           : "border-[#0E1116]/15 bg-white/70 hover:border-[#0E1116]/45"
-                      }`}
+                        }`}
                     >
                       <div className="flex items-baseline justify-between">
                         <span className="font-syne font-extrabold text-[#0E1116] text-2xl leading-none">
@@ -326,15 +389,23 @@ export default function CustomPuzzleBuilder() {
 
                 <button
                   type="button"
-                  disabled={!photo}
-                  className={`mt-5 w-full inline-flex items-center justify-center gap-2 font-bold px-6 py-3.5 rounded-full transition-colors ${
-                    photo
+                  onClick={handleCheckout}
+                  disabled={!photo || isUploading || !cloudinaryUrl}
+                  className={`mt-5 w-full inline-flex items-center justify-center gap-2 font-bold px-6 py-3.5 rounded-full transition-colors ${photo && !isUploading && cloudinaryUrl
                       ? "bg-[#F26A1F] hover:bg-[#E05A10] text-white shadow-[0_10px_28px_-6px_rgba(242,106,31,0.55)]"
                       : "bg-white/15 text-white/50 cursor-not-allowed"
-                  }`}
+                    }`}
                 >
-                  <ShoppingCart size={18} />
-                  {photo ? "Add to cart" : "Upload a photo to continue"}
+                  {isUploading ? (
+                    <Loader2 size={18} className="animate-spin" />
+                  ) : (
+                    <ShoppingCart size={18} />
+                  )}
+                  {isUploading
+                    ? "Uploading..."
+                    : photo
+                      ? "Checkout"
+                      : "Upload a photo to continue"}
                 </button>
               </div>
 
@@ -356,9 +427,8 @@ function StepHeader({ index, label, done }: { index: number; label: string; done
   return (
     <div className="flex items-center gap-2.5 mb-3">
       <span
-        className={`w-6 h-6 rounded-full flex items-center justify-center font-syne font-bold text-[11px] ${
-          done ? "bg-[#0E1116] text-[#FBEADB]" : "bg-[#0E1116]/10 text-[#0E1116]"
-        }`}
+        className={`w-6 h-6 rounded-full flex items-center justify-center font-syne font-bold text-[11px] ${done ? "bg-[#0E1116] text-[#FBEADB]" : "bg-[#0E1116]/10 text-[#0E1116]"
+          }`}
       >
         {done ? <Check size={12} /> : index}
       </span>
@@ -382,11 +452,10 @@ function OrientationOption({
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-xl border p-4 flex items-center gap-4 transition-all ${
-        selected
+      className={`rounded-xl border p-4 flex items-center gap-4 transition-all ${selected
           ? "border-[#0E1116] bg-white shadow-[0_8px_24px_-12px_rgba(14,17,22,0.25)]"
           : "border-[#0E1116]/15 bg-white/70 hover:border-[#0E1116]/45"
-      }`}
+        }`}
       aria-pressed={selected}
     >
       <span
@@ -461,9 +530,8 @@ function PuzzlePreview({
         onDrop={onDrop}
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
-        className={`relative block w-full overflow-hidden rounded-[14px] transition-all ${
-          photo ? "cursor-default" : "cursor-pointer"
-        } ${dragOver ? "ring-4 ring-[#F26A1F]/40" : ""}`}
+        className={`relative block w-full overflow-hidden rounded-[14px] transition-all ${photo ? "cursor-default" : "cursor-pointer"
+          } ${dragOver ? "ring-4 ring-[#F26A1F]/40" : ""}`}
         style={{
           aspectRatio: aspect,
           background: photo
