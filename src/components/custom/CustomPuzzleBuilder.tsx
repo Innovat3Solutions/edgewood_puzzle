@@ -64,9 +64,17 @@ function buildPuzzlePath(cols: number, rows: number): string {
   return d;
 }
 
-export default function CustomPuzzleBuilder() {
+export default function CustomPuzzleBuilder({
+  initialName = "",
+  initialEmail = "",
+}: {
+  initialName?: string;
+  initialEmail?: string;
+}) {
   const [photo, setPhoto] = useState<string | null>(null);
   const [photoName, setPhotoName] = useState<string | null>(null);
+  const [fullName, setFullName] = useState(initialName);
+  const [email, setEmail] = useState(initialEmail);
   const [orientation, setOrientation] = useState<Orientation>("landscape");
   const [variantIdx, setVariantIdx] = useState<number>(2); // 500 pc default
   const [dragOver, setDragOver] = useState(false);
@@ -167,6 +175,9 @@ export default function CustomPuzzleBuilder() {
     checkoutUrl.searchParams.set("pieces", variant.pieces.toString());
     checkoutUrl.searchParams.set("custom_puzzle", "true");
 
+    if (fullName) checkoutUrl.searchParams.set("full_name", fullName);
+    if (email) checkoutUrl.searchParams.set("email", email);
+
     window.location.href = checkoutUrl.toString();
   };
 
@@ -252,9 +263,42 @@ export default function CustomPuzzleBuilder() {
 
             {/* RIGHT — configurator */}
             <div className="flex flex-col gap-8">
-              {/* Step 1 — upload */}
+              {/* Step 1 — contact info */}
               <div>
-                <StepHeader index={1} label="Upload your photo" done={!!photo} />
+                <StepHeader index={1} label="Contact details" done={!!fullName && !!email} />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="fullName" className="font-dm text-xs font-semibold text-[#0E1116]/60 ml-1">
+                      Full Name
+                    </label>
+                    <input
+                      id="fullName"
+                      type="text"
+                      placeholder="John Doe"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl border border-[#0E1116]/15 bg-white/70 text-[#0E1116] focus:outline-none focus:border-[#F26A1F] focus:ring-1 focus:ring-[#F26A1F] transition-all font-dm text-sm"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="email" className="font-dm text-xs font-semibold text-[#0E1116]/60 ml-1">
+                      Email Address
+                    </label>
+                    <input
+                      id="email"
+                      type="email"
+                      placeholder="john@example.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl border border-[#0E1116]/15 bg-white/70 text-[#0E1116] focus:outline-none focus:border-[#F26A1F] focus:ring-1 focus:ring-[#F26A1F] transition-all font-dm text-sm"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Step 2 — upload */}
+              <div>
+                <StepHeader index={2} label="Upload your photo" done={!!photo} />
                 <input
                   ref={fileInputRef}
                   id={inputId}
@@ -298,8 +342,8 @@ export default function CustomPuzzleBuilder() {
                     onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
                     onDragLeave={() => setDragOver(false)}
                     className={`flex items-center gap-4 rounded-xl border-2 border-dashed p-4 cursor-pointer transition-colors ${dragOver
-                        ? "border-[#F26A1F] bg-[#F26A1F]/5"
-                        : "border-[#0E1116]/20 bg-white hover:border-[#0E1116]/45"
+                      ? "border-[#F26A1F] bg-[#F26A1F]/5"
+                      : "border-[#0E1116]/20 bg-white hover:border-[#0E1116]/45"
                       }`}
                   >
                     <span className="w-12 h-12 rounded-lg bg-[#FBEADB] flex items-center justify-center text-[#F26A1F] shrink-0">
@@ -317,9 +361,9 @@ export default function CustomPuzzleBuilder() {
                 )}
               </div>
 
-              {/* Step 2 — orientation */}
+              {/* Step 3 — orientation */}
               <div>
-                <StepHeader index={2} label="Choose orientation" />
+                <StepHeader index={3} label="Choose orientation" />
                 <div className="grid grid-cols-2 gap-3">
                   <OrientationOption
                     selected={orientation === "landscape"}
@@ -336,9 +380,9 @@ export default function CustomPuzzleBuilder() {
                 </div>
               </div>
 
-              {/* Step 3 — piece count */}
+              {/* Step 4 — piece count */}
               <div>
-                <StepHeader index={3} label="Pick a piece count" />
+                <StepHeader index={4} label="Pick a piece count" />
                 <div className="grid grid-cols-2 gap-3">
                   {VARIANTS.map((v, i) => (
                     <button
@@ -346,8 +390,8 @@ export default function CustomPuzzleBuilder() {
                       type="button"
                       onClick={() => setVariantIdx(i)}
                       className={`text-left rounded-xl border p-4 transition-all ${variantIdx === i
-                          ? "border-[#0E1116] bg-white shadow-[0_8px_24px_-12px_rgba(14,17,22,0.25)]"
-                          : "border-[#0E1116]/15 bg-white/70 hover:border-[#0E1116]/45"
+                        ? "border-[#0E1116] bg-white shadow-[0_8px_24px_-12px_rgba(14,17,22,0.25)]"
+                        : "border-[#0E1116]/15 bg-white/70 hover:border-[#0E1116]/45"
                         }`}
                     >
                       <div className="flex items-baseline justify-between">
@@ -390,10 +434,10 @@ export default function CustomPuzzleBuilder() {
                 <button
                   type="button"
                   onClick={handleCheckout}
-                  disabled={!photo || isUploading || !cloudinaryUrl}
-                  className={`mt-5 w-full inline-flex items-center justify-center gap-2 font-bold px-6 py-3.5 rounded-full transition-colors ${photo && !isUploading && cloudinaryUrl
-                      ? "bg-[#F26A1F] hover:bg-[#E05A10] text-white shadow-[0_10px_28px_-6px_rgba(242,106,31,0.55)]"
-                      : "bg-white/15 text-white/50 cursor-not-allowed"
+                  disabled={!photo || isUploading || !cloudinaryUrl || !fullName || !email}
+                  className={`mt-5 w-full inline-flex items-center justify-center gap-2 font-bold px-6 py-3.5 rounded-full transition-colors ${photo && !isUploading && cloudinaryUrl && fullName && email
+                    ? "bg-[#F26A1F] hover:bg-[#E05A10] text-white shadow-[0_10px_28px_-6px_rgba(242,106,31,0.55)]"
+                    : "bg-white/15 text-white/50 cursor-not-allowed"
                     }`}
                 >
                   {isUploading ? (
@@ -403,9 +447,11 @@ export default function CustomPuzzleBuilder() {
                   )}
                   {isUploading
                     ? "Uploading..."
-                    : photo
-                      ? "Checkout"
-                      : "Upload a photo to continue"}
+                    : (!fullName || !email)
+                      ? "Complete your details"
+                      : photo
+                        ? "Checkout"
+                        : "Upload a photo to continue"}
                 </button>
               </div>
 
@@ -453,8 +499,8 @@ function OrientationOption({
       type="button"
       onClick={onClick}
       className={`rounded-xl border p-4 flex items-center gap-4 transition-all ${selected
-          ? "border-[#0E1116] bg-white shadow-[0_8px_24px_-12px_rgba(14,17,22,0.25)]"
-          : "border-[#0E1116]/15 bg-white/70 hover:border-[#0E1116]/45"
+        ? "border-[#0E1116] bg-white shadow-[0_8px_24px_-12px_rgba(14,17,22,0.25)]"
+        : "border-[#0E1116]/15 bg-white/70 hover:border-[#0E1116]/45"
         }`}
       aria-pressed={selected}
     >

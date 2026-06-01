@@ -91,7 +91,8 @@ export default function AboutPage() {
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
-                  href="/shop"
+                 /* href="/shop" */
+                 href="https://sites.leadconnectorhq.com/preview/gUjvKKMq000excSAmwSb"
                   className="inline-flex items-center gap-2 bg-[#F26A1F] hover:bg-[#E05A10] text-white font-bold text-sm px-6 py-3 rounded-full transition shadow-[0_10px_28px_-6px_rgba(242,106,31,0.55)]"
                 >
                   Shop Signature Editions <ArrowUpRight size={16} />
@@ -265,12 +266,39 @@ export default function AboutPage() {
               </ul>
             </div>
 
+              <div>
+<iframe
+    src="https://api.leadconnectorhq.com/widget/form/Ynest0YtAyRHTicrTnO3"
+    style={{ width: "100%", height: "100%", border: "none", borderRadius: "20px" }}
+    id="inline-Ynest0YtAyRHTicrTnO3" 
+    data-layout="{'id':'INLINE'}"
+    data-trigger-type="alwaysShow"
+    data-trigger-value=""
+    data-activation-type="alwaysActivated"
+    data-activation-value=""
+    data-deactivation-type="neverDeactivate"
+    data-deactivation-value=""
+    data-form-name="Edgewood contact form"
+    data-height="499"
+    data-layout-iframe-id="inline-Ynest0YtAyRHTicrTnO3"
+    data-form-id="Ynest0YtAyRHTicrTnO3"
+    title="Edgewood contact form"
+    
+        >
+</iframe>
+<script src="https://link.msgsndr.com/js/form_embed.js"></script>
+
+              </div>
+
+               {/*kkk 
+
             <form
               className="rounded-2xl bg-[#FAF7F2] border border-[#0E1116]/10 p-7 md:p-9"
               action="mailto:hello@edgewoodpuzzle.com"
               method="post"
               encType="text/plain"
             >
+             
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                 <label className="block">
                   <span className="font-dm text-[11px] uppercase tracking-[0.22em] text-[#B7541F] mb-2 block">
@@ -322,7 +350,11 @@ export default function AboutPage() {
               >
                 Send message <ArrowUpRight size={16} />
               </button>
+
             </form>
+                    
+            */}
+
           </div>
         </section>
 
@@ -352,7 +384,8 @@ export default function AboutPage() {
               </span>
             </h2>
             <Link
-              href="/shop"
+              /*href="/shop"*/
+              href="https://sites.leadconnectorhq.com/preview/gUjvKKMq000excSAmwSb"
               className="inline-flex items-center gap-2 bg-[#F26A1F] hover:bg-[#E05A10] text-white font-bold text-sm px-7 py-3.5 rounded-full transition shadow-[0_12px_32px_-6px_rgba(242,106,31,0.55)]"
             >
               Start a puzzle <ArrowUpRight size={16} />

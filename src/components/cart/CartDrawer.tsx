@@ -111,7 +111,8 @@ export default function CartDrawer() {
                     Browse our collections and add a puzzle to get started.
                   </p>
                   <Link
-                    href="/shop"
+                    /*href="/shop"*/
+                    href={"https://sites.leadconnectorhq.com/preview/gUjvKKMq000excSAmwSb"}
                     onClick={close}
                     className="inline-flex items-center bg-[#F26A1F] hover:bg-[#E05A10] text-white font-bold text-sm px-6 py-3 rounded-full transition-colors shadow-[0_10px_28px_-6px_rgba(242,106,31,0.55)]"
                   >
