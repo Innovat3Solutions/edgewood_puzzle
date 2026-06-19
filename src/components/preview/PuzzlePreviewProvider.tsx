@@ -18,6 +18,7 @@ export type PuzzlePreviewPayload = {
   material?: string;
   dimensions?: string;
   slug?: string;
+  addToCartUrl?: string;
 };
 
 type Ctx = {
@@ -375,32 +376,37 @@ export default function PuzzlePreviewProvider({ children }: { children: React.Re
                           Free U.S. shipping over $35
                         </div>
                       </div>
+
                       <button
                         type="button"
                         onClick={() => {
-                          if (!payload || !selectedVariant) return;
-                          addToCart({
-                            slug:
-                              payload.slug ??
-                              `${payload.title}-${selectedVariant.pieces}`
-                                .toLowerCase()
-                                .replace(/[^a-z0-9]+/g, "-"),
-                            title: payload.title,
-                            subtitle: payload.subtitle,
-                            image: payload.image,
-                            collection: payload.collection,
-                            pieces: selectedVariant.pieces,
-                            price: selectedVariant.price,
-                            material: payload.material,
-                            dimensions: payload.dimensions,
-                          });
-                          close();
+                          if (payload.addToCartUrl) {
+                            window.open(payload.addToCartUrl, "_self");
+                          } else if (selectedVariant) {
+                            addToCart({
+                              slug:
+                                payload.slug ??
+                                `${payload.title}-${selectedVariant.pieces}`
+                                  .toLowerCase()
+                                  .replace(/[^a-z0-9]+/g, "-"),
+                              title: payload.title,
+                              subtitle: payload.subtitle,
+                              image: payload.image,
+                              collection: payload.collection,
+                              pieces: selectedVariant.pieces,
+                              price: selectedVariant.price,
+                              material: payload.material,
+                              dimensions: payload.dimensions,
+                            });
+                            close();
+                          }
                         }}
                         className="w-full inline-flex items-center justify-center gap-2 bg-[#F26A1F] hover:bg-[#E05A10] text-white font-bold px-6 py-3.5 rounded-full transition-colors shadow-[0_10px_28px_-6px_rgba(242,106,31,0.55)]"
                       >
                         <ShoppingCart size={18} />
-                        Add to cart
+                        {payload.addToCartUrl ? "Buy Now" : "Add to cart"}
                       </button>
+                      
                     </div>
                   )}
 

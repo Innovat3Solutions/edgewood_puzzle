@@ -17,7 +17,7 @@ export type Puzzle = {
   variants: PuzzleVariant[];
   material?: string;
   dimensions?: string;
-   addToCartUrl?: string;
+  addToCartUrl?: string;
 };
 
 const cardboardVariants: PuzzleVariant[] = [
@@ -31,20 +31,20 @@ const RON_MAGILL_PACKAGING =
 
 const ronMagillPuzzleList: Puzzle[] = [
   {
-    slug: "lion",
-    title: "African Lion",
-    subtitle: "Panthera leo",
-    file: "lion",
+    slug: "Penguin",
+    title: "Gentoo Penguin",
+    subtitle: "Gentoo Penguin",
+    file: "gentoo-penguin",
     addToCartUrl:
-      "https://app.innovat3solutions.com/v2/preview/Pm6eHzF5W99lcJvYZvGN/product/69fcb135b4f5114b0bacc4c3?variant=69fcb135b4f51172e5acc4d8",
+      "https://store.edgewoodpuzzle.co/product-details/product/69fcc12cc23ecf52ae035baf",
   },
   {
-    slug: "elephant",
-    title: "African Elephant",
-    subtitle: "Loxodonta africana",
-    file: "elephant",
+    slug: "giraffe",
+    title: "Giraffe and Calf",
+    subtitle: "Giraffe and Calf",
+    file: "giraffe",
     addToCartUrl:
-      "https://app.innovat3solutions.com/v2/preview/Pm6eHzF5W99lcJvYZvGN/product/69fcc12cc23ecf52ae035baf?variant=69fcc12cc23ecf980e035bb4",
+      "https://store.edgewoodpuzzle.co/product-details/product/6a172099bf042c1b7b0bb126",
   },
   {
     slug: "leopard",
@@ -52,15 +52,15 @@ const ronMagillPuzzleList: Puzzle[] = [
     subtitle: "Panthera pardus",
     file: "leopard",
     addToCartUrl:
-      "https://app.innovat3solutions.com/v2/preview/Pm6eHzF5W99lcJvYZvGN/product/69fcfce6c23ecf0f170ecc9b?variant=69fcfce6c23ecf3dd50eccaa",
+      "https://store.edgewoodpuzzle.co/product-details/product/6a171e44ce3bad65babccb97",
   },
   {
-    slug: "rhinoceros",
-    title: "Black Rhinoceros",
-    subtitle: "Diceros bicornis",
-    file: "rhinoceros",
+    slug: "Koala",
+    title: "Koala and Joey",
+    subtitle: "Koala and Joey",
+    file: "koala",
     addToCartUrl:
-      "https://app.innovat3solutions.com/v2/preview/Pm6eHzF5W99lcJvYZvGN/product/69fcfd7156effbc5e67932c5?variant=69fcfd7156effbc6cc7932ca",
+      "https://store.edgewoodpuzzle.co/product-details/product/6a171fc5be87b62a1aea9783",
   },
 ].map(({ slug, title, subtitle, file, addToCartUrl }) => ({
   slug: `ron-${slug}`,
@@ -85,23 +85,27 @@ const cherpCardboard: Puzzle[] = [
     slug: "cherp-red-panda",
     title: "Red Panda",
     file: "CherpStudio_RedPanda_19_25x26_625in.jpg",
+    addToCartUrl: "https://store.edgewoodpuzzle.co/product-details/product/6a1759513e1d77b4cd6a26cb", // Add this line
   },
   {
     slug: "cherp-gorilla",
     title: "Western Gorilla",
     file: "CherpStudio_Gorilla_19_25x26_625in.jpg",
+    addToCartUrl: "https://store.edgewoodpuzzle.co/product-details/product/6a1757953e1d77380b6a1eaf",
   },
   {
     slug: "cherp-elephant",
     title: "Asian Elephant",
     file: "CherpStudio_Adult_Elephant_19_25x26_625in.jpg",
+    addToCartUrl: "https://store.edgewoodpuzzle.co/product-details/product/6a17291802a06b5706a8d609",
   },
   {
     slug: "cherp-macaws",
     title: "Macaws in Flight",
     file: "CherpStudio_Parrots_19_25x26_625in.jpg",
+    addToCartUrl: "https://store.edgewoodpuzzle.co/product-details/product/6a172c88b465a17938660c2f",
   },
-].map(({ slug, title, file }) => ({
+].map(({ slug, title, file, addToCartUrl }) => ({
   slug,
   title,
   subtitle: "Cherp Studio",
@@ -113,6 +117,7 @@ const cherpCardboard: Puzzle[] = [
   variants: cardboardVariants,
   material: "Cardboard",
   dimensions: "8\" × 10\"",
+  addToCartUrl,
 }));
 
 const cherpWood: Puzzle[] = [
@@ -120,13 +125,15 @@ const cherpWood: Puzzle[] = [
     slug: "cherp-tiger-wood",
     title: "Tiger",
     file: "CherpStudio_WOOD_Tiger_12x12in_REV.jpg",
+    addToCartUrl: "https://store.edgewoodpuzzle.co/product-details/product/6a1733e5bf042ca8940c0c36",
   },
   {
     slug: "cherp-giraffe-wood",
     title: "Giraffe",
     file: "CherpStudio_WOOD_giraffe_12x12in_REV2.jpg",
+    addToCartUrl: "https://store.edgewoodpuzzle.co/product-details/product/6a175319a607c95b1cc8bc2f",
   },
-].map(({ slug, title, file }) => ({
+].map(({ slug, title, file, addToCartUrl }) => ({
   slug,
   title,
   subtitle: "Cherp Studio · Wood",
@@ -138,6 +145,7 @@ const cherpWood: Puzzle[] = [
   variants: [{ pieces: 48, price: 6.99 }],
   material: "Wood",
   dimensions: "12\" × 12\"",
+  addToCartUrl,
 }));
 
 const cherpStudioPuzzleList: Puzzle[] = [...cherpCardboard, ...cherpWood];
@@ -150,23 +158,27 @@ const wildInColorList: Puzzle[] = [
     slug: "wic-axolotl",
     title: "Axolotl",
     file: "Wild in Color_Axelotl_100 pieces_13_25x16_56in.jpg",
+    addToCartUrl: "https://store.edgewoodpuzzle.co/product-details/product/6a17383ebf042c62590c2710",
   },
   {
     slug: "wic-chameleon",
     title: "Chameleon",
     file: "Wild in Color_Chameleon_100 pieces_13_25x16_56in.jpg",
+    addToCartUrl: "https://store.edgewoodpuzzle.co/product-details/product/6a172b02b465a1d2926605e8",
   },
   {
     slug: "wic-tigers",
     title: "Tigers",
     file: "Wild in Color_tigers_100 pieces_13_25x16_56in.jpg",
+    addToCartUrl: "https://store.edgewoodpuzzle.co/product-details/product/6a172eb42830ddceedb378a7",
   },
   {
     slug: "wic-orangutans",
     title: "Orangutans",
     file: "Wild in Color_Orangs_19_25x26_625in.jpg",
+    addToCartUrl: "https://store.edgewoodpuzzle.co/product-details/product/6a1735b05a13a74ac7f0dd7a",
   },
-].map(({ slug, title, file }) => ({
+].map(({ slug, title, file, addToCartUrl }) => ({
   slug,
   title,
   subtitle: "Wild in Color",
@@ -178,6 +190,7 @@ const wildInColorList: Puzzle[] = [
   variants: cardboardVariants,
   material: "Cardboard",
   dimensions: "8\" × 10\"",
+  addToCartUrl,
 }));
 
 export const puzzles: Puzzle[] = [

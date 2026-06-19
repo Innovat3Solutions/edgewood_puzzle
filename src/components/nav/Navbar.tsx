@@ -10,7 +10,7 @@ import { useCart } from "@/components/cart/CartProvider";
 const primary = [
   { href: "/", label: "Home" },
  //{ href: "/shop", label: "Shop" },
-  {href:"https://app.innovat3solutions.com/v2/preview/gUjvKKMq000excSAmwSb", label: "Shop"},
+  {href:"https://store.edgewoodpuzzle.co/", label: "Shop"},
   { href: "/custom", label: "Custom" },
   { href: "/about", label: "About Edgewood" },
 ];
@@ -112,7 +112,7 @@ export default function Navbar({ variant = "light" }: { variant?: Variant }) {
               )}
             </button>
             <Link
-              href="https://app.innovat3solutions.com/v2/preview/gUjvKKMq000excSAmwSb"
+              href="https://store.edgewoodpuzzle.co/"
               className="inline-flex items-center bg-[#F26A1F] hover:bg-[#E05A10] text-white font-bold text-sm px-5 py-2.5 rounded-full transition-colors shadow-[0_8px_24px_-6px_rgba(242,106,31,0.5)]"
               target="_blank"
               rel="noopener noreferrer"

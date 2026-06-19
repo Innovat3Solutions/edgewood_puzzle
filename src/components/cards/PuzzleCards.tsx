@@ -13,14 +13,15 @@ type Card = {
   href: string;
   image: string;
   pieces: string;
+  addToCartUrl?: string;
 };
 
 // Hand-curated alternation across collections for visual rhythm.
 const CARDS: Card[] = [
-  { id: "lion",       title: "African Lion",     collection: "Ron Magill",    href: "/collections/ron-magill",    image: "/puzzles/ron-magill/lion.jpeg",              pieces: "500 pieces" },
+  { id: "Penguin",    title: "Gentoo Penguin",   collection: "Ron Magill",    href: "/collections/ron-magill",    image: "/puzzles/ron-magill/gentoo-penguin.jpeg",              pieces: "500 pieces" },
   { id: "wic-tigers", title: "Tigers",           collection: "Wild in Color", href: "/collections/wild-in-color", image: "/puzzles/wild-in-color/Wild in Color_tigers_100 pieces_13_25x16_56in.jpg", pieces: "500 pieces" },
   { id: "cherp-rp",   title: "Red Panda",        collection: "Cherp Studio",  href: "/collections/cherp-studio",  image: "/puzzles/cherp-studio/CherpStudio_RedPanda_19_25x26_625in.jpg",            pieces: "500 pieces" },
-  { id: "elephant",   title: "African Elephant", collection: "Ron Magill",    href: "/collections/ron-magill",    image: "/puzzles/ron-magill/elephant.jpeg",                                        pieces: "500 pieces" },
+  { id: "giraffe",   title: "Giraffe and Calf", collection: "Ron Magill",    href: "/collections/ron-magill",    image: "/puzzles/ron-magill/giraffe.jpeg",                                        pieces: "500 pieces" },
   { id: "wic-axo",    title: "Axolotl",          collection: "Wild in Color", href: "/collections/wild-in-color", image: "/puzzles/wild-in-color/Wild in Color_Axelotl_100 pieces_13_25x16_56in.jpg", pieces: "500 pieces" },
   { id: "panda",      title: "Giant Panda",      collection: "Ron Magill",    href: "/collections/ron-magill",    image: "/puzzles/ron-magill/giant-panda.jpeg",                                     pieces: "500 pieces" },
   { id: "cherp-tig",  title: "Tiger (Wood)",     collection: "Cherp Studio",  href: "/collections/cherp-studio",  image: "/puzzles/cherp-studio/CherpStudio_WOOD_Tiger_12x12in_REV.jpg",             pieces: "48 pieces · wood" },
@@ -127,6 +128,7 @@ export default function PuzzleCards() {
                   title: card.title,
                   collection: card.collection,
                   pieces: card.pieces,
+                  addToCartUrl: card.addToCartUrl,
                 })
               }
               className="group relative text-left bg-white rounded-xl overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] transition-shadow focus:outline-none focus:ring-2 focus:ring-[#F26A1F] focus:ring-offset-2 focus:ring-offset-[#FBEADB] shrink-0 w-[78vw] sm:w-[340px] md:w-[380px] snap-start"

@@ -3,16 +3,16 @@ import Image from "next/image";
 import { Mail, MapPin } from "lucide-react";
 
 const shop = [
-  { href: "/shop", label: "All Puzzles" },
-  { href: "/shop?pieces=300", label: "300 Piece" },
-  { href: "/shop?pieces=500", label: "500 Piece" },
-  { href: "/shop?pieces=1000", label: "1000 Piece" },
+  { href: "https://store.edgewoodpuzzle.co/", label: "All Puzzles" },
+  { href: "https://store.edgewoodpuzzle.co/", label: "300 Piece" },
+  { href: "https://store.edgewoodpuzzle.co/", label: "500 Piece" },
+  { href: "https://store.edgewoodpuzzle.co/", label: "1000 Piece" },
 ];
 
 const collections = [
-  { href: "/shop?collection=ron-magill", label: "Ron Magill" },
-  { href: "/shop?collection=cherp-studio", label: "Cherp Studio" },
-  { href: "/shop?collection=wild-in-color", label: "Wild in Color" },
+  { href: "https://store.edgewoodpuzzle.co/products-list/collections/ron-magill", label: "Ron Magill" },
+  { href: "https://store.edgewoodpuzzle.co/products-list/", label: "Cherp Studio" },
+  { href: "https://store.edgewoodpuzzle.co/products-list/collections/wild-in-color", label: "Wild in Color" },
 ];
 
 const company = [

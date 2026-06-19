@@ -116,6 +116,7 @@ export default function TabbedCollections() {
                     variants: p.variants,
                     material: p.material,
                     dimensions: p.dimensions,
+                    addToCartUrl: p.addToCartUrl,
                   })
                 }
                 aria-label={`Preview ${p.title}`}
@@ -140,38 +141,32 @@ export default function TabbedCollections() {
                   <span className="font-dm font-bold text-[#0E1116] text-sm md:text-[15px]">
                     ${p.price.toFixed(2)}
                   </span>
-                  {/*
                   <button
                     type="button"
-                    onClick={() =>
-                      addToCart({
-                        slug: p.slug,
-                        title: p.title,
-                        subtitle: p.subtitle,
-                        image: p.image,
-                        collection: collectionLabel(p.collection),
-                        pieces: p.pieces,
-                        price: p.price,
-                        material: p.material,
-                        dimensions: p.dimensions,
-                      })
-                    }
+                    onClick={() => {
+                      if (p.addToCartUrl) {
+                        window.open(p.addToCartUrl, "_self");
+                      } else {
+                        open({
+                          slug: p.slug,
+                          image: p.image,
+                          title: p.title,
+                          subtitle: p.subtitle,
+                          collection: collectionLabel(p.collection),
+                          pieces: p.pieces,
+                          packaging: p.packaging,
+                          variants: p.variants,
+                          material: p.material,
+                          dimensions: p.dimensions,
+                        });
+                      }
+                    }}
                     aria-label={`Add ${p.title} to cart`}
                     className="inline-flex items-center gap-1.5 bg-[#F26A1F] hover:bg-[#E05A10] text-white font-semibold text-xs px-3 py-1.5 rounded-full transition-colors shadow-[0_6px_16px_-6px_rgba(242,106,31,0.55)]"
                   >
-                    <ShoppingCart size={13} /> 
-                    Add
-                  </button> 
-                  */}
-                  <button
-  type="button"
-  onClick={() => window.open(p.addToCartUrl, "_self")}
-  aria-label={`Add ${p.title} to cart`}
-  className="inline-flex items-center gap-1.5 bg-[#F26A1F] hover:bg-[#E05A10] text-white font-semibold text-xs px-3 py-1.5 rounded-full transition-colors shadow-[0_6px_16px_-6px_rgba(242,106,31,0.55)]"
->
-  <ShoppingCart size={13} />
-  Add
-</button>
+                    <ShoppingCart size={13} />
+                    {p.addToCartUrl ? "Add" : "View"}
+                  </button>
                 </div>
               </div>
             </div>
@@ -181,7 +176,7 @@ export default function TabbedCollections() {
         <div className="mt-12 text-center">
           <Link
            // href={tabHref(tab)}
-           href="https://app.innovat3solutions.com/v2/preview/gUjvKKMq000excSAmwSb"
+           href="https://store.edgewoodpuzzle.co/"
             className="inline-flex items-center font-dm text-sm font-semibold text-[#0E1116] border border-[#0E1116] hover:bg-[#0E1116] hover:text-white rounded-full px-6 py-3 transition-colors"
           >
             View All →

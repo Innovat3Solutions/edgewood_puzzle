@@ -85,7 +85,7 @@ export default function VideoHero() {
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <Link
            // href="/shop"
-           href="https://app.innovat3solutions.com/v2/preview/gUjvKKMq000excSAmwSb"
+           href="https://store.edgewoodpuzzle.co/"
             className="inline-flex items-center bg-[#F26A1F] hover:bg-[#E05A10] text-white font-bold px-7 py-3.5 rounded-full transition-colors shadow-[0_10px_28px_-6px_rgba(242,106,31,0.55)]"
             style={{ fontSize: 15 }}
           >

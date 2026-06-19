@@ -77,6 +77,7 @@ export default function PuzzleCard({
       variants: puzzle.variants,
       material: puzzle.material,
       dimensions: puzzle.dimensions,
+      addToCartUrl: puzzle.addToCartUrl,
     });
   return (
     <div
@@ -109,22 +110,26 @@ export default function PuzzleCard({
           <span className={`font-syne font-bold ${t.price}`}>${puzzle.price.toFixed(2)}</span>
           <button
             type="button"
-            onClick={() =>
-              addToCart({
-                slug: puzzle.slug,
-                title: puzzle.title,
-                subtitle: puzzle.subtitle,
-                image: puzzle.image,
-                collection: puzzle.subtitle,
-                pieces: puzzle.pieces,
-                price: puzzle.price,
-                material: puzzle.material,
-                dimensions: puzzle.dimensions,
-              })
-            }
+            onClick={() => {
+              if (puzzle.addToCartUrl) {
+                window.open(puzzle.addToCartUrl, "_self");
+              } else {
+                addToCart({
+                  slug: puzzle.slug,
+                  title: puzzle.title,
+                  subtitle: puzzle.subtitle,
+                  image: puzzle.image,
+                  collection: puzzle.subtitle,
+                  pieces: puzzle.pieces,
+                  price: puzzle.price,
+                  material: puzzle.material,
+                  dimensions: puzzle.dimensions,
+                });
+              }
+            }}
             className={`text-xs border px-3 py-1.5 rounded transition ${t.button}`}
           >
-            Add to cart
+            {puzzle.addToCartUrl ? "Buy Now" : "Add to cart"}
           </button>
         </div>
       </div>
