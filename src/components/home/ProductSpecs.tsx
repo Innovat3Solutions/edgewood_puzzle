@@ -85,7 +85,7 @@ export default function ProductSpecs() {
           </div>
 
           <Link
-            href="/shop"
+            href="https://store.edgewoodpuzzle.co/"
             className="inline-flex items-center bg-[#F26A1F] hover:bg-[#E05A10] text-white font-bold px-8 py-4 rounded-md shadow-[0_10px_30px_-5px_rgba(242,106,31,0.35)] transition"
           >
             Shop all puzzles

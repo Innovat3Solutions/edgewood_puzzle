@@ -1,12 +1,12 @@
 import Link from "next/link";
 
 const TAGS = [
-  { label: "Bestsellers", href: "/shop" },
-  { label: "Ron Magill Wildlife", href: "/collections/ron-magill" },
-  { label: "Wild in Color", href: "/collections/wild-in-color" },
-  { label: "Cherp Studio", href: "/collections/cherp-studio" },
-  { label: "500 Piece", href: "/shop?pieces=500" },
-  { label: "Wood Puzzles", href: "/shop?pieces=48" },
+  { label: "Bestsellers", href: "https://store.edgewoodpuzzle.co/" },
+  { label: "Ron Magill Wildlife", href: "https://store.edgewoodpuzzle.co/products-list/collections/ron-magill" },
+  { label: "Wild in Color", href: "https://store.edgewoodpuzzle.co/products-list/collections/wild-in-color" },
+  { label: "Cherp Studio", href: "https://store.edgewoodpuzzle.co/products-list/" },
+  { label: "500 Piece", href: "https://store.edgewoodpuzzle.co/" },
+  { label: "Wood Puzzles", href: "https://store.edgewoodpuzzle.co/" },
   { label: "Made in USA", href: "/about" },
 ];
 

@@ -175,8 +175,7 @@ export default function TabbedCollections() {
 
         <div className="mt-12 text-center">
           <Link
-           // href={tabHref(tab)}
-           href="https://store.edgewoodpuzzle.co/"
+            href={tabHref(tab)}
             className="inline-flex items-center font-dm text-sm font-semibold text-[#0E1116] border border-[#0E1116] hover:bg-[#0E1116] hover:text-white rounded-full px-6 py-3 transition-colors"
           >
             View All →
@@ -190,13 +189,13 @@ export default function TabbedCollections() {
 function tabHref(tab: TabKey): string {
   switch (tab) {
     case "ron":
-      return "/shop?collection=ron-magill";
+      return "https://store.edgewoodpuzzle.co/products-list/collections/ron-magill";
     case "cherp":
-      return "/shop?collection=cherp-studio";
+      return "https://store.edgewoodpuzzle.co/products-list/";
     case "wild":
-      return "/shop?collection=wild-in-color";
+      return "https://store.edgewoodpuzzle.co/products-list/collections/wild-in-color";
     default:
-      return "/shop";
+      return "https://store.edgewoodpuzzle.co/";
   }
 }
 

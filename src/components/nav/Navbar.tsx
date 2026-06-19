@@ -227,7 +227,7 @@ export default function Navbar({ variant = "light" }: { variant?: Variant }) {
             {/* Footer CTA */}
             <div className="relative pl-8 pr-6 pb-10 pt-5 border-t border-[#0E1116]/10 flex items-center gap-3">
               <Link
-                href="/shop"
+                href="https://store.edgewoodpuzzle.co/"
                 onClick={() => setMobileOpen(false)}
                 className="flex-1 inline-flex items-center justify-center bg-[#F26A1F] text-white font-bold px-6 py-3.5 rounded-full shadow-[0_10px_28px_-6px_rgba(242,106,31,0.55)] transition hover:bg-[#E05A10]"
               >
