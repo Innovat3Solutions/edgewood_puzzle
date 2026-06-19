@@ -29,7 +29,7 @@ export default function VideoHero() {
       if (!v) return;
       if (i === active) {
         v.currentTime = 0;
-        v.play().catch(() => {});
+        v.play().catch(() => { });
       }
     });
   }, [active]);
@@ -84,19 +84,19 @@ export default function VideoHero() {
 
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <Link
-           // href="/shop"
-           href="https://store.edgewoodpuzzle.co/"
+            // href="/shop"
+            href="https://store.edgewoodpuzzle.co/"
             className="inline-flex items-center bg-[#F26A1F] hover:bg-[#E05A10] text-white font-bold px-7 py-3.5 rounded-full transition-colors shadow-[0_10px_28px_-6px_rgba(242,106,31,0.55)]"
             style={{ fontSize: 15 }}
           >
             Shop Now
           </Link>
           <Link
-            href="/custom"
+            href="/about#contact"
             className="inline-flex items-center border border-white/70 hover:bg-white hover:text-[#0E1116] text-white font-semibold px-7 py-3.5 rounded-full transition-colors backdrop-blur-sm"
             style={{ fontSize: 15 }}
           >
-            Custom Photo Puzzle
+            Contact Us
           </Link>
         </div>
       </div>
@@ -108,9 +108,8 @@ export default function VideoHero() {
             type="button"
             aria-label={`Show video ${i + 1}`}
             onClick={() => setActive(i)}
-            className={`h-1.5 rounded-full transition-all ${
-              i === active ? "w-8 bg-white" : "w-3 bg-white/40 hover:bg-white/70"
-            }`}
+            className={`h-1.5 rounded-full transition-all ${i === active ? "w-8 bg-white" : "w-3 bg-white/40 hover:bg-white/70"
+              }`}
           />
         ))}
       </div>

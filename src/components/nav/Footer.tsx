@@ -17,7 +17,7 @@ const collections = [
 
 const company = [
   { href: "/about", label: "About Edgewood" },
-  { href: "/custom", label: "Custom Puzzle" },
+  // { href: "/custom", label: "Custom Puzzle" },
   { href: "/about#contact", label: "Contact" },
 ];
 

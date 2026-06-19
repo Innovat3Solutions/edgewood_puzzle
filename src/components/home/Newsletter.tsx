@@ -2,7 +2,7 @@ import { Mail } from "lucide-react";
 
 export default function Newsletter() {
   return (
-    <section className="relative py-24 md:py-32 px-4 overflow-hidden bg-[#0E1116]">
+    <section id="newsletter" className="relative py-24 md:py-32 px-4 overflow-hidden bg-[#0E1116]">
       <div
         className="absolute inset-0 opacity-[0.06] pointer-events-none"
         style={{

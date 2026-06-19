@@ -9,9 +9,9 @@ import { useCart } from "@/components/cart/CartProvider";
 
 const primary = [
   { href: "/", label: "Home" },
- //{ href: "/shop", label: "Shop" },
-  {href:"https://store.edgewoodpuzzle.co/", label: "Shop"},
-  { href: "/custom", label: "Custom" },
+  //{ href: "/shop", label: "Shop" },
+  { href: "https://store.edgewoodpuzzle.co/", label: "Shop" },
+  // { href: "/custom", label: "Custom" },
   { href: "/about", label: "About Edgewood" },
 ];
 
@@ -55,14 +55,12 @@ export default function Navbar({ variant = "light" }: { variant?: Variant }) {
         Order today · Most orders ship within 3 working days · Free U.S. shipping over $35
       </div>
       <header
-        className={`fixed top-[34px] md:top-[32px] left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? scrolledBg : "bg-transparent border-b border-transparent"
-        }`}
+        className={`fixed top-[34px] md:top-[32px] left-0 right-0 z-50 transition-all duration-300 ${scrolled ? scrolledBg : "bg-transparent border-b border-transparent"
+          }`}
       >
         <div
-          className={`relative max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between transition-all duration-300 ${
-            scrolled ? "h-[68px]" : "h-[88px]"
-          }`}
+          className={`relative max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between transition-all duration-300 ${scrolled ? "h-[68px]" : "h-[88px]"
+            }`}
         >
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0" aria-label="Edgewood Puzzles home">
@@ -72,9 +70,8 @@ export default function Navbar({ variant = "light" }: { variant?: Variant }) {
               width={260}
               height={164}
               priority
-              className={`w-auto transition-all duration-300 ${
-                scrolled ? "h-12" : "h-16"
-              }`}
+              className={`w-auto transition-all duration-300 ${scrolled ? "h-12" : "h-16"
+                }`}
               style={{
                 filter: overDark
                   ? "brightness(0) invert(1) drop-shadow(0 2px 8px rgba(0,0,0,0.35))"
