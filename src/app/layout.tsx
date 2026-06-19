@@ -14,6 +14,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Edgewood Puzzles | Premium American-Made Jigsaw Puzzles",
   description: "Find your next favorite jigsaw puzzle. Wildlife, wood, and signature artist collections, printed and finished in the USA.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
