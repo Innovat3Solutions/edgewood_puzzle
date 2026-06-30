@@ -92,7 +92,7 @@ export default function AboutPage() {
               <div className="flex flex-wrap gap-3">
                 <Link
                  /* href="/shop" */
-                 href="https://sites.leadconnectorhq.com/preview/gUjvKKMq000excSAmwSb"
+                 href="https://store.edgewoodpuzzle.co/"
                   className="inline-flex items-center gap-2 bg-[#F26A1F] hover:bg-[#E05A10] text-white font-bold text-sm px-6 py-3 rounded-full transition shadow-[0_10px_28px_-6px_rgba(242,106,31,0.55)]"
                 >
                   Shop Signature Editions <ArrowUpRight size={16} />
@@ -385,7 +385,7 @@ export default function AboutPage() {
             </h2>
             <Link
               /*href="/shop"*/
-              href="https://sites.leadconnectorhq.com/preview/gUjvKKMq000excSAmwSb"
+              href="https://store.edgewoodpuzzle.co/"
               className="inline-flex items-center gap-2 bg-[#F26A1F] hover:bg-[#E05A10] text-white font-bold text-sm px-7 py-3.5 rounded-full transition shadow-[0_12px_32px_-6px_rgba(242,106,31,0.55)]"
             >
               Start a puzzle <ArrowUpRight size={16} />
